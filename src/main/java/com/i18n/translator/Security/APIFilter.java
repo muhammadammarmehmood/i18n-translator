@@ -22,6 +22,11 @@ public class APIFilter extends OncePerRequestFilter {
             HttpServletRequest request,
             HttpServletResponse response,
             FilterChain filterChain) throws ServletException, IOException {
+        String path = request.getRequestURI();
+        if (path.startsWith("/swagger-ui") || path.startsWith("/v3/api-docs")) {
+            filterChain.doFilter(request, response);
+            return;
+        }
         String apiKey = request.getHeader(API_KEY_HEADER);
         if (!validApiKey.equals(apiKey)) {
             response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);

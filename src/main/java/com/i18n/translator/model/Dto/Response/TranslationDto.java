@@ -2,8 +2,10 @@ package com.i18n.translator.model.Dto.Response;
 
 import com.i18n.translator.model.entities.Translation;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
+@NoArgsConstructor
 public class TranslationDto {
     private String localeCode;
     private String tagName;
@@ -17,6 +19,6 @@ public class TranslationDto {
         this.tagName = translation.getTag().getName();
         this.key = translation.getKey();
         this.content = translation.getContent();
-        this.activeIndicator = translation.getActiveIndicator();
+        this.activeIndicator = Boolean.TRUE.equals(translation.getActiveIndicator());;
     }
 }

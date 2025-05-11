@@ -7,6 +7,7 @@ import com.i18n.translator.model.Dto.Response.ErrorResponse;
 import com.i18n.translator.model.Dto.Response.ExportTranslationDTO;
 import com.i18n.translator.model.Dto.Response.PageableDto;
 import com.i18n.translator.model.Dto.Response.TranslationDto;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -16,6 +17,7 @@ import java.util.List;
 
 @AllArgsConstructor
 @RestController
+@SecurityRequirement(name = "ApiKeyAuth")
 @RequestMapping("/translations")
 public class TranslationController {
 

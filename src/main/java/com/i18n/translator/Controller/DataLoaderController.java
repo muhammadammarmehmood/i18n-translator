@@ -11,6 +11,7 @@ import com.i18n.translator.model.Dto.Request.TagDto;
 import com.i18n.translator.model.entities.Locale;
 import com.i18n.translator.model.entities.Tag;
 import com.i18n.translator.model.entities.Translation;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
@@ -22,6 +23,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/data-loader")
 @AllArgsConstructor
+@SecurityRequirement(name = "ApiKeyAuth")
 public class DataLoaderController {
 
     private final TranslationRepository translationRepository;

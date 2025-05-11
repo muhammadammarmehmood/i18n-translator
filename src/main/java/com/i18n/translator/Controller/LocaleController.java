@@ -3,6 +3,7 @@ package com.i18n.translator.Controller;
 import com.i18n.translator.Service.LocaleService;
 import com.i18n.translator.model.Dto.Request.LocaleDto;
 import com.i18n.translator.model.entities.Locale;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RequiredArgsConstructor
+@SecurityRequirement(name = "ApiKeyAuth")
 @RestController
 @RequestMapping("/locale")
 public class LocaleController {
