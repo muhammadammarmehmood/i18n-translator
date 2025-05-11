@@ -16,7 +16,7 @@ public class TagServiceImpl implements TagService {
     @Override
     public String addTag(TagDto tagDto) {
         if (tagRepository.findByName(tagDto.getName()).isPresent()) {
-            throw new IllegalArgumentException("Translation already exists.");
+            throw new IllegalArgumentException("Tag already exists.");
         }
         Tag tag = new Tag();
         tag.setName(tagDto.getName());

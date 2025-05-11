@@ -16,7 +16,7 @@ public class LocaleServiceImpl implements LocaleService {
     @Override
     public String addLocale(LocaleDto localeDto) {
         if (localeRepository.findByCode(localeDto.getCode()).isPresent()) {
-            throw new IllegalArgumentException("Translation already exists.");
+            throw new IllegalArgumentException("Locale already exists.");
         }
         Locale locale = new Locale();
         locale.setCode(localeDto.getCode());
