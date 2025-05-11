@@ -17,7 +17,7 @@ public abstract class BaseEntity {
     private OffsetDateTime updatedAt;
 
     @Column(name = "active_indicator", nullable = false)
-    private boolean activeIndicator;
+    private Boolean activeIndicator;
 
     @PrePersist
     protected void onCreate() {
