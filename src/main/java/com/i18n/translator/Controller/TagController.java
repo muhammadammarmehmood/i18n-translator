@@ -2,6 +2,7 @@ package com.i18n.translator.Controller;
 
 import com.i18n.translator.Service.TagService;
 import com.i18n.translator.model.Dto.Request.TagDto;
+import com.i18n.translator.model.entities.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -18,7 +19,7 @@ public class TagController {
 
     @PostMapping
     public ResponseEntity<?> createTag(@RequestBody TagDto tagDto) {
-        String tagName = tagService.addTag(tagDto);
-        return ResponseEntity.ok(new TagDto(tagName));
+         Tag tag = tagService.addTag(tagDto);
+        return ResponseEntity.ok(new TagDto(tag.getName()));
     }
 }

@@ -14,13 +14,13 @@ public class LocaleServiceImpl implements LocaleService {
 
 
     @Override
-    public String addLocale(LocaleDto localeDto) {
+    public Locale addLocale(LocaleDto localeDto) {
         if (localeRepository.findByCode(localeDto.getCode()).isPresent()) {
             throw new IllegalArgumentException("Locale already exists.");
         }
         Locale locale = new Locale();
         locale.setCode(localeDto.getCode());
         locale = localeRepository.save(locale);
-        return locale.getCode();
+        return locale;
     }
 }

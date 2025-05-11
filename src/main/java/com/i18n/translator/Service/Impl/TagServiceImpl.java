@@ -14,13 +14,13 @@ public class TagServiceImpl implements TagService {
 
 
     @Override
-    public String addTag(TagDto tagDto) {
+    public Tag addTag(TagDto tagDto) {
         if (tagRepository.findByName(tagDto.getName()).isPresent()) {
             throw new IllegalArgumentException("Tag already exists.");
         }
         Tag tag = new Tag();
         tag.setName(tagDto.getName());
         tag = tagRepository.save(tag);
-        return tag.getName();
+        return tag;
     }
 }

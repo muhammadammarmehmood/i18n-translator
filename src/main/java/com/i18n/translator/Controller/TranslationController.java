@@ -4,6 +4,8 @@ import com.i18n.translator.Service.TranslationService;
 import com.i18n.translator.Util.ListUtil;
 import com.i18n.translator.model.Dto.Request.TranslationRequestDTO;
 import com.i18n.translator.model.Dto.Response.ErrorResponse;
+import com.i18n.translator.model.Dto.Response.ExportTranslationDTO;
+import com.i18n.translator.model.Dto.Response.PageableDto;
 import com.i18n.translator.model.Dto.Response.TranslationDto;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -43,13 +45,24 @@ public class TranslationController {
             @RequestParam(required = false) String key,
             @RequestParam(required = false) String content,
             @RequestParam(required = false) String localeCode,
-            @RequestParam(required = false) String tagName) {
-
-        List<TranslationDto> translationDTOs = translationService.getTranslations(key, content, localeCode, tagName);
-        if(!ListUtil.isNullOrEmpty(translationDTOs)) {
+            @RequestParam(required = false) String tagName,
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "10") int size) {
+        if(key == null && content == null && localeCode == null && tagName == null) {
+            ErrorResponse errorResponse = new ErrorResponse("Atleast one parameter is required", 400);
+            ResponseEntity.badRequest().body(errorResponse);
+        }
+        PageableDto<List<TranslationDto>> translationDTOs = translationService.getTranslations(key, content, localeCode, tagName, page, size);
+        if(translationDTOs != null && !ListUtil.isNullOrEmpty(translationDTOs.getData())) {
             return ResponseEntity.ok(translationDTOs);
         }
         ErrorResponse errorResponse = new ErrorResponse("No translations found for the given search criteria.", 400);
         return ResponseEntity.badRequest().body(errorResponse);
+    }
+
+    @GetMapping("/export/{localeCode}")
+    public ResponseEntity<ExportTranslationDTO> exportTranslations(@PathVariable("localeCode") String localeCode) {
+        ExportTranslationDTO result = translationService.exportTranslations(localeCode);
+        return ResponseEntity.ok(result);
     }
 }
