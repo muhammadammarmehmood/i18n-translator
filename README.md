@@ -20,6 +20,7 @@
 
 #### 2. Set Up PostgreSQL Database
 - Create a database in PostgreSQL
+- `DDL.sql` file is provided in `resources/DB` folder of this project to create schema of the db
 - Update the `application.properties` file with your database connection details
 
 #### 3. Run the application
